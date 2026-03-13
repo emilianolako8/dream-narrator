@@ -274,6 +274,12 @@ if __name__ == "__main__":
         epoch_data = data[:, start:end]
         features, names = extract_features_from_epoch(epoch_data, sfreq)
         features_list.append(features)
+    
+    # Normalize features to zero mean and unit variance
+    features_array = np.array(features_list)
+    mean = features_array.mean(axis=0)
+    std  = features_array.std(axis=0) + 1e-10
+    features_list = [(f - mean) / std for f in features_list]
 
     print(f"Extracted features from {len(features_list)} epochs")
     print(f"Feature vector size: {len(features_list[0])}")
