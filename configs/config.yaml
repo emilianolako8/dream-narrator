@@ -1,0 +1,115 @@
+# ============================================================
+# DREAM NARRATOR — CENTRAL CONFIGURATION
+# ============================================================
+# All project settings live here.
+# Never hardcode these values in pipeline files.
+# Change them here and they update everywhere automatically.
+
+# ─────────────────────────────────────────
+# DATA SETTINGS
+# ─────────────────────────────────────────
+data:
+  # Path to PhysioNet sleep data
+  # ~ means home directory (C:/Users/YOUR_NAME on Windows)
+  raw_dir: "~/mne_data/physionet-sleep-data"
+  processed_dir: "data/processed"
+  embeddings_dir: "data/embeddings"
+
+  # Which subject to process (0 = first subject)
+  subject_id: 0
+  recording_id: 1
+
+  # EDF file naming pattern
+  psg_file: "SC4001E0-PSG.edf"
+  hypnogram_file: "SC4001EC-Hypnogram.edf"
+
+# ─────────────────────────────────────────
+# PREPROCESSING SETTINGS
+# ─────────────────────────────────────────
+preprocessing:
+  # Bandpass filter range in Hz
+  # 0.5 Hz lower: removes slow electrode drift
+  # 45.0 Hz upper: removes muscle noise, stays below Nyquist
+  bandpass_low: 0.5
+  bandpass_high: 45.0
+
+  # Epoch duration in seconds
+  # 30s is the standard in sleep research
+  epoch_duration: 30
+
+  # Number of epochs to process
+  # Increase this for more training data
+  n_epochs: 10
+
+# ─────────────────────────────────────────
+# FEATURE EXTRACTION SETTINGS
+# ─────────────────────────────────────────
+features:
+  # Frequency bands for power extraction
+  # These are universally agreed ranges in neuroscience
+  bands:
+    delta: [0.5, 4.0]    # deep sleep
+    theta: [4.0, 8.0]    # dreaming, REM
+    alpha: [8.0, 13.0]   # relaxed wakefulness
+    beta:  [13.0, 30.0]  # active thinking
+
+  # Welch PSD parameters
+  welch_window_sec: 4      # window length in seconds
+  welch_overlap_sec: 2     # overlap in seconds
+
+# ─────────────────────────────────────────
+# NEURAL ENCODER SETTINGS
+# ─────────────────────────────────────────
+encoder:
+  # Size of the dream fingerprint vector
+  # 16 = compact but expressive
+  # Increase to 32 for more detail, decrease to 8 for speed
+  embedding_dim: 16
+
+  # Training settings
+  learning_rate: 0.001
+  n_training_epochs: 20
+  dropout_rate: 0.3
+
+  # Model save path
+  model_path: "models/dream_encoder.pt"
+
+# ─────────────────────────────────────────
+# SEMANTIC DECODER SETTINGS
+# ─────────────────────────────────────────
+decoder:
+  # How many concepts to decode per epoch
+  top_n_concepts: 3
+
+  # How many dominant themes to show in report
+  top_n_themes: 5
+
+# ─────────────────────────────────────────
+# LLM SETTINGS
+# ─────────────────────────────────────────
+llm:
+  # Groq model to use
+  model: "llama-3.1-8b-instant"
+
+  # Temperature: 0.0 = deterministic, 1.0 = very creative
+  # 0.8 is a good balance for dream narratives
+  temperature: 0.8
+
+  # Maximum tokens in the generated narrative
+  max_tokens: 500
+
+  # Narrative style
+  # Options: "vivid", "psychological", "poetic", "cinematic"
+  style: "vivid"
+
+# ─────────────────────────────────────────
+# OUTPUT SETTINGS
+# ─────────────────────────────────────────
+output:
+  # Save dream report as text file
+  save_report: true
+  report_path: "data/processed/dream_report.txt"
+
+  # Save embeddings for later analysis
+  save_embeddings: true
+  embeddings_path: "data/embeddings/dream_embeddings.npy"
