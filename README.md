@@ -59,7 +59,7 @@ Epoch  9: chasing, flying, hiding
 **Dominant Themes:** chasing (3x), hiding (3x), flying (3x), family (3x)
 
 **Generated Narrative (vivid style):**
-> *You lifted off the ground, your body defying gravity as you took to the skies, flying above the treetops, the wind rushing past your face. But the exhilaration was short-lived, as the darkness below began to take shape, and you realized that you were being chased — and the nightmare was far from over.*
+> *You lifted off the ground, your body defying gravity as you took to the skies, flying above the treetops, the wind rushing past your face. But the exhilaration was short-lived, as the darkness below began to take shape, and you realized that you were being chased , and the nightmare was far from over.*
 
 ---
 
@@ -188,7 +188,7 @@ llm:
 ## Neuroscience Background
 
 ### Why EEG for Dream Decoding?
-During REM sleep the brain produces characteristic **theta waves (4-8 Hz)** — the frequency of hippocampal memory replay. By analyzing the power and distribution of these waves across electrodes, we can infer what cognitive processes are active.
+During REM sleep the brain produces characteristic **theta waves (4-8 Hz)** , the frequency of hippocampal memory replay. By analyzing the power and distribution of these waves across electrodes, we can infer what cognitive processes are active.
 
 ### Frequency Bands
 | Band | Frequency | Dream Relevance |
@@ -264,7 +264,7 @@ https://github.com/emilianolako8/dream-narrator
 ## Author
 
 **Emiliano Lako**
-Electronics Engineering Student | Neural Interface Engineer
+Electronics Engineering Student
 
 Building at the intersection of neuroscience, signal processing, and AI.
 
