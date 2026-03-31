@@ -95,12 +95,12 @@ class ConceptLibrary:
         # Define category centers in embedding space
         # These positions are chosen to be well-separated
         category_centers = {
-            'social'      : np.array([0.8, 0.2, -0.3] + [0.1] * 13),
-            'places'      : np.array([-0.3, 0.8, 0.2] + [0.1] * 13),
-            'actions'     : np.array([0.2, -0.3, 0.8] + [0.1] * 13),
-            'emotions'    : np.array([-0.8, -0.2, 0.3] + [0.1] * 13),
-            'objects'     : np.array([0.3, -0.8, -0.2] + [0.1] * 13),
-            'abstract'    : np.array([-0.2, 0.3, -0.8] + [0.1] * 13),
+             'social'  : np.array([0.8, 0.2, -0.3] + [0.1] * (self.embedding_dim - 3)),
+             'places'  : np.array([-0.3, 0.8, 0.2] + [0.1] * (self.embedding_dim - 3)),
+             'actions' : np.array([0.2, -0.3, 0.8] + [0.1] * (self.embedding_dim - 3)),
+             'emotions': np.array([-0.8, -0.2, 0.3] + [0.1] * (self.embedding_dim - 3)),
+             'objects' : np.array([0.3, -0.8, -0.2] + [0.1] * (self.embedding_dim - 3)),
+             'abstract': np.array([-0.2, 0.3, -0.8] + [0.1] * (self.embedding_dim - 3)),
         }
 
         # Map concepts to categories
